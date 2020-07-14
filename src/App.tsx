@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
     IonApp,
     IonContent,
@@ -38,49 +38,70 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonHeader>
-        <IonToolbar>
-            <IonTitle>BMI Calculator</IonTitle>
-        </IonToolbar>
-    </IonHeader>
-    <IonContent className="ion-padding">
-        <IonGrid>
-            <IonRow>
-                <IonCol>
-                    <IonItem>
-                        <IonLabel position="floating">Your Height</IonLabel>
-                        <IonInput />
-                    </IonItem>
-                    <IonItem>
-                        <IonLabel position="floating">Your Weight</IonLabel>
-                        <IonInput />
-                    </IonItem>
-                </IonCol>
-            </IonRow>
-            <IonRow>
-                <IonCol className="ion-text-left">
-                    <IonButton color="success">
-                        <IonIcon slot="start" icon={calculatorOutline} />
-                        Calculate
-                    </IonButton>
-                </IonCol>
-                <IonCol className="ion-text-right">
-                    <IonButton color="danger">
-                        <IonIcon slot="start" icon={refreshOutline} />
-                        Reset
-                    </IonButton>
-                </IonCol>
-            </IonRow>
-            <IonRow>
-                <IonCol>
+const App: React.FC = () => {
+    const weightInputRef = useRef<HTMLIonInputElement>(null);
+    const heightInputRef = useRef<HTMLIonInputElement>(null);
 
-                </IonCol>
-            </IonRow>
-        </IonGrid>
-    </IonContent>
-  </IonApp>
-);
+    const calculateBMI = () => {
+        const enteredWeight = weightInputRef.current!.value;
+        const enteredHeight = heightInputRef.current!.value;
+
+        if (!enteredHeight || !enteredWeight) {
+            return;
+        }
+
+        const bmi = +enteredWeight / (+enteredHeight * +enteredHeight);
+    };
+
+    const resetInputs = () => {
+        weightInputRef.current!.value = '';
+        heightInputRef.current!.value = '';
+    };
+
+    return (
+        <IonApp>
+            <IonHeader>
+                <IonToolbar>
+                    <IonTitle>BMI Calculator</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent className="ion-padding">
+                <IonGrid>
+                    <IonRow>
+                        <IonCol>
+                            <IonItem>
+                                <IonLabel position="floating">Your Height</IonLabel>
+                                <IonInput ref={heightInputRef} />
+                            </IonItem>
+                            <IonItem>
+                                <IonLabel position="floating">Your Weight</IonLabel>
+                                <IonInput ref={weightInputRef} />
+                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol className="ion-text-left">
+                            <IonButton color="success" onClick={calculateBMI}>
+                                <IonIcon slot="start" icon={calculatorOutline}/>
+                                Calculate
+                            </IonButton>
+                        </IonCol>
+                        <IonCol className="ion-text-right">
+                            <IonButton color="danger" onClick={resetInputs}>
+                                <IonIcon slot="start" icon={refreshOutline}/>
+                                Reset
+                            </IonButton>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
+            </IonContent>
+        </IonApp>
+    )
+};
 
 export default App;
