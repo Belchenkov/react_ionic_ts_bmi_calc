@@ -4,7 +4,7 @@ http://ionicframework.com/docs/theming/ */
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
+  --ion-color-primary: #257653;
   --ion-color-primary-rgb: 56, 128, 255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
@@ -225,4 +225,13 @@ http://ionicframework.com/docs/theming/ */
 
     --ion-tab-bar-background: #1f1f1f;
   }
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Varta:wght@400;700&display=swap');
+
+input,
+ion-button,
+ion-card-content,
+.font-varta {
+  font-family: 'Varta', sans-serif!important;
 }
