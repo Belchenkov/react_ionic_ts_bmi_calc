@@ -229,6 +229,11 @@ http://ionicframework.com/docs/theming/ */
 
 @import url('https://fonts.googleapis.com/css2?family=Varta:wght@400;700&display=swap');
 
+.result h2,
+.result h3 {
+  font-size: 20px!important;
+}
+
 input,
 ion-button,
 ion-card-content,

@@ -6,8 +6,9 @@ const BmiResult: React.FC<{result: number | string}> = ({result}) => {
         <IonRow>
             <IonCol>
                 <IonCard>
-                    <IonCardContent>
-                        <h2>{result}</h2>
+                    <IonCardContent className="result ion-text-center">
+                        <h2>Your Body-Mass-Index</h2>
+                        <h3>{result.toFixed(2)}</h3>
                     </IonCardContent>
                 </IonCard>
             </IonCol>
