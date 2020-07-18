@@ -10,7 +10,8 @@ import {
     IonCol,
     IonItem,
     IonLabel,
-    IonInput
+    IonInput,
+    IonAlert
 } from '@ionic/react';
 
 /* Core CSS required for Ionic components to work properly */
@@ -36,6 +37,7 @@ import BmiResult from "./components/BmiResult";
 
 const App: React.FC = () => {
     const [calculatedBmi, setCalculatedBmi] = useState<number>();
+    const [error, setError] = useState<string>();
 
     const weightInputRef = useRef<HTMLIonInputElement>(null);
     const heightInputRef = useRef<HTMLIonInputElement>(null);
@@ -44,7 +46,10 @@ const App: React.FC = () => {
         const enteredWeight = weightInputRef.current!.value;
         const enteredHeight = heightInputRef.current!.value;
 
-        if (!enteredHeight || !enteredWeight || +enteredWeight <=0 || +enteredHeight <= 0) return;
+        if (!enteredHeight || !enteredWeight || +enteredWeight <=0 || +enteredHeight <= 0) {
+            setError('Please enter valid (non-negative) numbers!');
+            return;
+        }
 
         const bmi = +enteredWeight / (+enteredHeight * +enteredHeight);
 
@@ -56,35 +61,52 @@ const App: React.FC = () => {
         heightInputRef.current!.value = '';
     };
 
+    const clearError = () => {
+        setError('');
+    };
+
     return (
-        <IonApp>
-            <IonHeader>
-                <IonToolbar color="primary">
-                    <IonTitle class="font-varta">BMI Calculator</IonTitle>
-                </IonToolbar>
-            </IonHeader>
-            <IonContent className="ion-padding">
-                <IonGrid>
-                    <IonRow>
-                        <IonCol>
-                            <IonItem>
-                                <IonLabel position="floating">Your Height</IonLabel>
-                                <IonInput type="number" ref={heightInputRef} />
-                            </IonItem>
-                            <IonItem>
-                                <IonLabel position="floating">Your Weight</IonLabel>
-                                <IonInput type="number" ref={weightInputRef} />
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <BmiControls
-                        onCalculate={calculateBMI}
-                        onReset={resetInputs}
-                    />
-                    { calculatedBmi && <BmiResult result={calculatedBmi} />}
-                </IonGrid>
-            </IonContent>
-        </IonApp>
+        <React.Fragment>
+            <IonAlert
+                isOpen={!!error}
+                message={error}
+                buttons={[
+                    {
+                        text: 'Ok',
+                        handler: () => { clearError() }
+                    }
+                ]}
+            />
+            <IonApp>
+                <IonHeader>
+                    <IonToolbar color="primary">
+                        <IonTitle class="font-varta">BMI Calculator</IonTitle>
+                    </IonToolbar>
+                </IonHeader>
+                <IonContent className="ion-padding">
+                    <IonGrid>
+                        <IonRow>
+                            <IonCol>
+                                <IonItem>
+                                    <IonLabel position="floating">Your Height</IonLabel>
+                                    <IonInput type="number" ref={heightInputRef} />
+                                </IonItem>
+                                <IonItem>
+                                    <IonLabel position="floating">Your Weight</IonLabel>
+                                    <IonInput type="number" ref={weightInputRef} />
+                                </IonItem>
+                            </IonCol>
+                        </IonRow>
+                        <BmiControls
+                            onCalculate={calculateBMI}
+                            onReset={resetInputs}
+                        />
+                        { calculatedBmi && <BmiResult result={calculatedBmi} />}
+                    </IonGrid>
+                </IonContent>
+            </IonApp>
+        </React.Fragment>
+
     )
 };
 
