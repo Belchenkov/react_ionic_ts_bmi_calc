@@ -8,7 +8,7 @@ const BmiResult: React.FC<{result: number | string}> = ({result}) => {
                 <IonCard>
                     <IonCardContent className="result ion-text-center">
                         <h2>Your Body-Mass-Index</h2>
-                        <h3>{result.toFixed(2)}</h3>
+                        <h3>{parseFloat(result as string).toFixed(2)}</h3>
                     </IonCardContent>
                 </IonCard>
             </IonCol>
