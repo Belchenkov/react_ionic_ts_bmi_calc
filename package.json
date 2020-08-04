@@ -1,8 +1,13 @@
 {
   "name": "react-ionic-ts-bmi-calc",
   "version": "0.0.1",
+  "author": {
+    "name": "Aleksey Belchenkov",
+    "email": "u608110@gmail.com"
+  },
   "private": true,
   "dependencies": {
+    "@capacitor/android": "^2.2.1",
     "@capacitor/core": "2.2.1",
     "@ionic/react": "^5.0.7",
     "@ionic/react-router": "^5.0.7",
