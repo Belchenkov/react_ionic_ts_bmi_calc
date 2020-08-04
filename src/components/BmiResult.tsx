@@ -1,18 +1,16 @@
 import React from 'react';
-import { IonCard, IonCardContent, IonCol, IonRow } from "@ionic/react";
+import { IonCard, IonCardContent } from "@ionic/react";
+
+import './BmiResult.css';
 
 const BmiResult: React.FC<{result: number | string}> = ({result}) => {
     return (
-        <IonRow>
-            <IonCol>
-                <IonCard>
-                    <IonCardContent className="result ion-text-center">
-                        <h2>Your Body-Mass-Index</h2>
-                        <h3>{parseFloat(result as string).toFixed(2)}</h3>
-                    </IonCardContent>
-                </IonCard>
-            </IonCol>
-        </IonRow>
+        <IonCard id="result">
+            <IonCardContent className="result ion-text-center">
+                <h2>Your Body-Mass-Index</h2>
+                <h3>{parseFloat(result as string).toFixed(2)}</h3>
+            </IonCardContent>
+        </IonCard>
     );
 };
 
