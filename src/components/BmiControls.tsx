@@ -17,13 +17,22 @@ const BmiControls: React.FC<{
     return (
         <IonRow className="ion-margin-top">
             <IonCol size="12" size-md="6" className="ion-text-center">
-                <IonButton color="success" onClick={onCalculate}>
+                <IonButton
+                    expand="full"
+                    color="secondary"
+                    onClick={onCalculate}
+                >
                     <IonIcon slot="start" icon={calculatorOutline}/>
                     Calculate
                 </IonButton>
             </IonCol>
-            <IonCol size="12" size-md="6"  className="ion-text-center">
-                <IonButton color="danger" onClick={onReset}>
+            <IonCol size="12" size-md="6" className="ion-text-center">
+                <IonButton
+                    color="danger"
+                    fill="clear"
+                    onClick={onReset}
+                    expand="full"
+                >
                     <IonIcon slot="start" icon={refreshOutline}/>
                     Reset
                 </IonButton>
